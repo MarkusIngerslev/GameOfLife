@@ -14,6 +14,7 @@ function startGame() {
     // Hent værdier fra inputfelterne
     const rows = parseInt(document.getElementById("input-rows").value);
     const cols = parseInt(document.getElementById("input-cols").value);
+    const loopTimer = parseInt(document.getElementById("input-speed").value);
 
     // Initialize model and view med brugerdefineret rækker og kolonner
     model.init(rows, cols);
@@ -27,7 +28,7 @@ function startGame() {
     view.updateBoard(model.getGrid());
 
     // Start spillet med automatisk opdatering af generationer
-    startGameLoop();
+    startGameLoop(loopTimer);
 }
 
 function handleClick(row, col) {
@@ -36,9 +37,9 @@ function handleClick(row, col) {
     view.updateBoard(model.getGrid());
 }
 
-function startGameLoop() {
+function startGameLoop(loopTimer) {
     setInterval(() => {
         model.getNextGeneration();
         view.updateBoard(model.getGrid());
-    }, 500); // Justér intervallet som ønsket
+    }, loopTimer); // Justér intervallet som ønsket
 }
