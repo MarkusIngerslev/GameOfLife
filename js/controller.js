@@ -10,14 +10,16 @@ function init() {
 
     // Lyt til start-knappen
     document.getElementById("start-btn").addEventListener("click", startGame);
+    document.getElementById("clear-btn").addEventListener("click", clearGrid);
+    document.getElementById("add-random-btn").addEventListener("click", addRandomCells);    
 }
 
 function startGame() {
     // Hent værdier fra inputfelterne
     const rows = parseInt(document.getElementById("input-rows").value);
     const cols = parseInt(document.getElementById("input-cols").value);
-    const loopTimer = parseInt(document.getElementById("input-speed").value);
-    const population = parseInt(document.getElementById("input-population").value);
+    const speed = parseInt(document.getElementById("input-speed").value);
+    const liveCells = parseInt(document.getElementById("input-population").value);
 
     // Initialize model and view med brugerdefineret rækker og kolonner
     model.init(rows, cols);
@@ -28,14 +30,14 @@ function startGame() {
     view.setClickerListener(handleClick);
 
     // Sæt nogle celler til at være levende fra start
-    populateRandomCells(population);
+    populateRandomCells(liveCells);
 
     // Vis det initiale grid i visningen
     view.updateBoard(model.getGrid());
 
     // Start spillet med automatisk opdatering af generationer
     generations = 0;
-    startGameLoop(loopTimer);
+    startGameLoop(speed);
 }
 
 function handleClick(row, col) {
@@ -63,4 +65,24 @@ function startGameLoop(loopTimer) {
         generations++;
         view.updateGeneration(generations);
     }, loopTimer); // Justér intervallet som ønsket
+}
+
+// Funktion til at tømme grid'et
+function clearGrid() {
+    const rows = parseInt(document.getElementById("input-rows").value);
+    const cols = parseInt(document.getElementById("input-cols").value);
+
+    // Nulstil grid i model.js
+    model.init(rows, cols);
+
+    // opdater visningen
+    view.updateBoard(model.getGrid());
+}
+
+function addRandomCells() {
+    const liveCells = parseInt(document.getElementById("input-population").value);
+    populateRandomCells(liveCells);
+
+    // opdater visningen
+    view.updateBoard(model.getGrid());
 }
