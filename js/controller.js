@@ -3,6 +3,8 @@ import * as view from "./view.js";
 
 window.addEventListener("load", init);
 
+let generations = 0;
+
 function init() {
     console.log("JavaScript is live! 🚀🎉");
 
@@ -32,6 +34,7 @@ function startGame() {
     view.updateBoard(model.getGrid());
 
     // Start spillet med automatisk opdatering af generationer
+    generations = 0;
     startGameLoop(loopTimer);
 }
 
@@ -57,5 +60,7 @@ function startGameLoop(loopTimer) {
     setInterval(() => {
         model.getNextGeneration();
         view.updateBoard(model.getGrid());
+        generations++;
+        view.updateGeneration(generations);
     }, loopTimer); // Justér intervallet som ønsket
 }

@@ -1,4 +1,4 @@
-export { init, createBoard, setClickerListener, updateBoard };
+export { init, createBoard, setClickerListener, updateBoard, updateGeneration };
 
 function init() {
     console.log("View initialized");
@@ -56,4 +56,8 @@ function updateBoard(grid) {
             }
         }
     }
+}
+
+function updateGeneration(generations) {
+    document.getElementById("display-generation").textContent = generations;
 }
