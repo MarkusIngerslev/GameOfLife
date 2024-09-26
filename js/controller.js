@@ -6,32 +6,39 @@ window.addEventListener("load", init);
 function init() {
     console.log("JavaScript is live! 🚀🎉");
 
-    const rows = 15; // Ændre antal rækker
-    const cols = 15; // Ændre antal kolonner
+    // Lyt til start-knappen
+    document.getElementById("start-btn").addEventListener("click", startGame);
+}
 
-    // Initialize model and view
+function startGame() {
+    // Hent værdier fra inputfelterne
+    const rows = parseInt(document.getElementById("input-rows").value);
+    const cols = parseInt(document.getElementById("input-cols").value);
+
+    // Initialize model and view med brugerdefineret rækker og kolonner
     model.init(rows, cols);
     view.init();
 
-    // Create the board
+    // Opret spillebrættet med den nye størrelse
     view.createBoard(rows, cols);
     view.setClickerListener(handleClick);
 
-    // Update the board with the initial state
+    // Vis det initiale grid i visningen
     view.updateBoard(model.getGrid());
 
-    // Start the game (or step through manually)
-    startGame();
+    // Start spillet med automatisk opdatering af generationer
+    startGameLoop();
 }
 
 function handleClick(row, col) {
+    // Skift celle-status på klik (død eller levende)
     model.toggleCellState(row, col);
     view.updateBoard(model.getGrid());
 }
 
-function startGame() {
+function startGameLoop() {
     setInterval(() => {
         model.getNextGeneration();
         view.updateBoard(model.getGrid());
-    }, 500); // Adjust the interval as needed
+    }, 500); // Justér intervallet som ønsket
 }

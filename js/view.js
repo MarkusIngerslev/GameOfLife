@@ -1,7 +1,7 @@
 export { init, createBoard, setClickerListener, updateBoard };
 
 function init() {
-    console.log("View is live! 🚀🎉");
+    console.log("View initialized");
 }
 
 function createBoard(rows, cols) {

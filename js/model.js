@@ -5,7 +5,7 @@ let rows, cols;
 
 // Initialize the model and create the grid
 function init(r = 10, c = 10) {
-    console.log("Model is live! 🚀🎉");
+    console.log("Model initialized");
     rows = r;
     cols = c;
     grid = createEmptyGrid(rows, cols);
